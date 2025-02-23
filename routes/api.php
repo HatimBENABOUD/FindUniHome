@@ -8,6 +8,9 @@ Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 
+Route::get('/profile', [UserController::class, 'profile'])->middleware('auth');
+Route::post('/profile/update', [UserController::class, 'updateProfile'])->middleware('auth');
+
 Route::get('/listings', [ListingController::class, 'index']);
 Route::get('/listings/{id}', [ListingController::class, 'show']);
 Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
