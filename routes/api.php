@@ -2,17 +2,20 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListingController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FavoriteController;
 
-Route::post('/register', [UserController::class, 'register']);
-Route::post('/login', [UserController::class, 'login']);
-Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
-
-Route::get('/profile', [UserController::class, 'profile'])->middleware('auth');
-Route::post('/profile/update', [UserController::class, 'updateProfile'])->middleware('auth');
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/{id}', [UserController::class, 'show']);
+Route::post('/users', [UserController::class, 'store']);
+Route::put('/users/{id}', [UserController::class, 'update']);
+Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
 Route::get('/listings', [ListingController::class, 'index']);
 Route::get('/listings/{id}', [ListingController::class, 'show']);
-Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
-Route::put('/listings/{id}', [ListingController::class, 'update'])->middleware('auth');
-Route::delete('/listings/{id}', [ListingController::class, 'destroy'])->middleware('auth');
+Route::post('/listings', [ListingController::class, 'store']);
+Route::put('/listings/{id}', [ListingController::class, 'update']);
+Route::delete('/listings/{id}', [ListingController::class, 'destroy']);
+
+Route::get('/favorites/{user_id}', [FavoriteController::class, 'index']);
+Route::post('/favorites', [FavoriteController::class, 'store']);
+Route::delete('/favorites', [FavoriteController::class, 'destroy']);
